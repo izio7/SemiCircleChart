@@ -1,7 +1,8 @@
 package core;
 
-import java.util.ArrayList;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
 public class Test extends Application{
 	@Override
 	public void start(Stage primaryStage) {
-		ArrayList<SemiCircleChart.Data> dataList = new ArrayList<SemiCircleChart.Data>();
+		ObservableList<SemiCircleChart.Data> dataList = FXCollections.observableArrayList();
 
 		dataList.add(new SemiCircleChart.Data("data1", 1, Color.RED));
 		dataList.add(new SemiCircleChart.Data("data2", 2, Color.GREEN));
