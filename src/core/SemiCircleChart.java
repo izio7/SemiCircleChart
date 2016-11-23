@@ -19,14 +19,35 @@ public class SemiCircleChart extends Chart {
 	private Color holeColor = Color.web("#f4f4f4");
 	private Color separatorColor = holeColor;
 	
-	public SemiCircleChart(ObservableList<Data> data){
-		this(data, 0, 0,100);
+	/**
+	 * Construct a new SemiCircleChart with the data given.
+	 * @param dataList the data to use
+	 */
+	public SemiCircleChart(ObservableList<Data> dataList){ 
+		this(dataList, 0, 0,100);
 	}
 	
+	/**
+	 * Construct a new SemiCircleChart with the data given, at the given location, with the specified radius.
+	 * @param dataList the data to use
+	 * @param centerX X coordinate
+	 * @param centerY Y coordinate
+	 * @param radius the radius of the chart
+	 */
 	public SemiCircleChart(ObservableList<Data> dataList, double centerX, double centerY, double radius){
 		this(dataList,centerX,centerY,radius,0,0);
 	}
-
+	
+	/**
+	 * Construct a new SemiCircleChart with the data given, at the given location, with the specified radius, and adds an inner hole with the specified radius, and separators between slices with the specified length.
+	 * @param dataList the data to use
+	 * @param centerX X coordinate
+	 * @param centerY Y coordinate
+	 * @param radius the radius of the chart, must be &gt;0
+	 * @param innerHoleRadius the radius of the inner hole, must be &gt;=0. If no hole is desired, enter 0 or use one of the other constructors.
+	 * @param separatorLength the length of the separators between slices, must be &gt;= 0. If no separators are desired, enter 0 or use one of the other constructors.
+	 * @throws IllegalArgumentException if radius&lt;=0, innerHoleRadius&lt;0 or separatorLength&lt;0
+	 */
 	public SemiCircleChart(ObservableList<Data> dataList, double centerX, double centerY, double radius, double innerHoleRadius, double separatorLength){
 		this.dataList = dataList;
 		this.centerX = centerX;
@@ -37,6 +58,10 @@ public class SemiCircleChart extends Chart {
 		makeChart();
 	}
 	
+	/**
+	 * Sets the color of the inner hole, can be used to match the background color.
+	 * @param holeColor the Color for the inner hole.
+	 */
 	public void setHoleColor(Color holeColor){
 		this.holeColor = holeColor;
 		
@@ -45,6 +70,10 @@ public class SemiCircleChart extends Chart {
 		makeChart();
 	}
 	
+	/**
+	 * Sets the color of the separator, can be used to match the background color.
+	 * @param separatorColor the Color for the separator.
+	 */
 	public void setSeparatorColor(Color separatorColor){
 		this.separatorColor = separatorColor;
 		
@@ -52,6 +81,7 @@ public class SemiCircleChart extends Chart {
 		this.getChildren().clear();
 		makeChart();
 	}
+	
 	private void makeChart(){
 		double totalValues=0;
 		
@@ -111,6 +141,7 @@ public class SemiCircleChart extends Chart {
 				sep.setType(ArcType.ROUND);
 				sep.setFill(separatorColor);
 				sep.setLength(-separatorLength);
+				
 				//we calculate the start angle so half of the separator overlaps one slice and the other half the other.
 				double halfLength = separatorLength/2;
 				sep.setStartAngle(totalAngle+halfLength);
@@ -137,40 +168,81 @@ public class SemiCircleChart extends Chart {
 	
 	@Override
 	protected void layoutChartChildren(double top, double left, double width, double height) {
-		// TODO Auto-generated method stub
+		// TODO implement this
 		
 	}
 
+	/**
+	 * Class for holding the data for SemiCircleChart, it stores the name of the data element, its value and the color of the slice that will represent it.
+	 *
+	 */
 	public static final class Data{
 		private String name;
 		private double value;
 		private Color color;
 		
+		/**
+		 * Creates a new Data object. The color will be chosen at random, since it's not specified.
+		 * @param name the name of the data element.
+		 * @param value the value of the data element.
+		 */
 		public Data(String name, double value) {
 			this(name,value,Color.color(Math.random(), Math.random(), Math.random()));
 		}
 		
+		/**
+		 * Creates a new Data object with the specified color.
+		 * @param name the name of the data element.
+		 * @param value the value of the data element.
+		 * @param color the color for the slice that will represent the data element.
+		 */
 		public Data(String name, double value, Color color) {
 			this.name = name;
 			this.value = value;
 			this.color = color;
 		}
 		
+		/**
+		 * @return The name of the Data element.
+		 */
 		public String getName() {
 			return name;
 		}
+		
+		/**
+		 * Sets the name of the Data element.
+		 * @param name the new name for the element.
+		 */
 		public void setName(String name) {
 			this.name = name;
 		}
+		
+		/**
+		 * @return The value of the data element.
+		 */
 		public double getValue() {
 			return value;
 		}
+		
+		/**
+		 * Sets a new value for the Data element.
+		 * @param value the new value for the element.
+		 */
 		public void setValue(double value) {
 			this.value = value;
 		}
+		
+		/**
+		 * @return The color assigned to the Data element.
+		 */
 		public Color getColor() {
 			return color;
 		}
+		
+		/**
+		 * Assign a new color to the Data element.
+		 * @param color the new color for representing the element.
+		 */
 		public void setColor(Color color) {
 			this.color = color;
 		}
