@@ -96,12 +96,13 @@ public class SemiCircleChart extends Chart {
 						tooltip.hide();
 					}
 				});
-			this.getChildren().add(slice);
+				
+				getChartChildren().add(slice);
 			
 			if(separatorLength<0){
 				throw new IllegalArgumentException("separatorLength can't be negative");
 			}
-			else if(separatorLength>0&&i<dataList.size()-1){
+			else if(separatorLength>0&&i<dataList.size()-1){ //checking it's not the last slice because there can't be a separator after it.
 				Arc sep = new Arc();
 				sep.setCenterX(centerX);
 				sep.setCenterY(centerY);
@@ -113,14 +114,14 @@ public class SemiCircleChart extends Chart {
 				//we calculate the start angle so half of the separator overlaps one slice and the other half the other.
 				double halfLength = separatorLength/2;
 				sep.setStartAngle(totalAngle+halfLength);
-				this.getChildren().add(sep);
+				getChartChildren().add(sep);
 			}
-		}
+		} //closing for loop
 		
 		if(innerHoleRadius<0){
 			throw new IllegalArgumentException("innerHoleRadius can't be negative");
 		}
-		else{
+		else if(innerHoleRadius!=0){
 			Arc hole = new Arc();
 			hole.setCenterX(centerX);
 			hole.setCenterY(centerY);
@@ -130,10 +131,15 @@ public class SemiCircleChart extends Chart {
 			hole.setFill(holeColor);
 			hole.setStartAngle(0);
 			hole.setLength(180);
-			this.getChildren().add(hole);
+			getChartChildren().add(hole);
 		}
 	}
-
+	
+	@Override
+	protected void layoutChartChildren(double top, double left, double width, double height) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public static final class Data{
 		private String name;
@@ -168,13 +174,5 @@ public class SemiCircleChart extends Chart {
 		public void setColor(Color color) {
 			this.color = color;
 		}
-		
-	}
-
-
-	@Override
-	protected void layoutChartChildren(double top, double left, double width, double height) {
-		// TODO Auto-generated method stub
-		
 	}
 }
