@@ -49,6 +49,10 @@ public class SemiCircleChart extends Chart {
 	 * @throws IllegalArgumentException if radius&lt;=0, innerHoleRadius&lt;0 or separatorLength&lt;0
 	 */
 	public SemiCircleChart(ObservableList<Data> dataList, double centerX, double centerY, double radius, double innerHoleRadius, double separatorLength){
+		if(radius<=0) { throw new IllegalArgumentException("radius must be >0"); }
+		if(separatorLength<0){ throw new IllegalArgumentException("separatorLength can't be negative"); }
+		if(innerHoleRadius<0){ throw new IllegalArgumentException("innerHoleRadius can't be negative");	}
+		
 		this.dataList = dataList;
 		this.centerX = centerX;
 		this.centerY = centerY;
@@ -129,10 +133,8 @@ public class SemiCircleChart extends Chart {
 				
 				getChartChildren().add(slice);
 			
-			if(separatorLength<0){
-				throw new IllegalArgumentException("separatorLength can't be negative");
-			}
-			else if(separatorLength>0&&i<dataList.size()-1){ //checking it's not the last slice because there can't be a separator after it.
+			
+			if(separatorLength>0&&i<dataList.size()-1){ //checking it's not the last slice because there can't be a separator after it.
 				Arc sep = new Arc();
 				sep.setCenterX(centerX);
 				sep.setCenterY(centerY);
@@ -149,10 +151,7 @@ public class SemiCircleChart extends Chart {
 			}
 		} //closing for loop
 		
-		if(innerHoleRadius<0){
-			throw new IllegalArgumentException("innerHoleRadius can't be negative");
-		}
-		else if(innerHoleRadius!=0){
+		if(innerHoleRadius!=0){
 			Arc hole = new Arc();
 			hole.setCenterX(centerX);
 			hole.setCenterY(centerY);
