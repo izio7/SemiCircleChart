@@ -1,17 +1,16 @@
 package core;
 
-import java.util.List;
-
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.scene.Parent;
+import javafx.scene.chart.Chart;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 
-public class SemiCircleChart extends Parent{ //TODO: this should extend Chart in the future
-	private List<Data> dataList;
+public class SemiCircleChart extends Chart {
+	private ObservableList<Data> dataList;
 	private double centerX;
 	private double centerY;
 	private double radius;
@@ -20,15 +19,15 @@ public class SemiCircleChart extends Parent{ //TODO: this should extend Chart in
 	private Color holeColor = Color.web("#f4f4f4");
 	private Color separatorColor = holeColor;
 	
-	public SemiCircleChart(List<Data> data){
+	public SemiCircleChart(ObservableList<Data> data){
 		this(data, 0, 0,100);
 	}
 	
-	public SemiCircleChart(List<Data> dataList, double centerX, double centerY, double radius){
+	public SemiCircleChart(ObservableList<Data> dataList, double centerX, double centerY, double radius){
 		this(dataList,centerX,centerY,radius,0,0);
 	}
 
-	public SemiCircleChart(List<Data> dataList, double centerX, double centerY, double radius, double innerHoleRadius, double separatorLength){
+	public SemiCircleChart(ObservableList<Data> dataList, double centerX, double centerY, double radius, double innerHoleRadius, double separatorLength){
 		this.dataList = dataList;
 		this.centerX = centerX;
 		this.centerY = centerY;
@@ -169,6 +168,13 @@ public class SemiCircleChart extends Parent{ //TODO: this should extend Chart in
 		public void setColor(Color color) {
 			this.color = color;
 		}
+		
+	}
+
+
+	@Override
+	protected void layoutChartChildren(double top, double left, double width, double height) {
+		// TODO Auto-generated method stub
 		
 	}
 }
