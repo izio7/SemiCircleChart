@@ -63,6 +63,20 @@ public class SemiCircleChart extends Chart {
 	}
 	
 	/**
+	 * @return The data represented by the chart.
+	 */
+	public ObservableList<Data> getData(){
+		return dataList;
+	}
+	
+	/**
+	 * @param data The data the chart will represent.
+	 */
+	public void setData(ObservableList<Data> data) {
+		dataList = data;
+	}
+	
+	/**
 	 * Sets the color of the inner hole, can be used to match the background color.
 	 * @param holeColor the Color for the inner hole.
 	 */
