@@ -10,7 +10,7 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 
 public class SemiCircleChart extends Chart {
-	private ObservableList<Data> dataList;
+	private ObservableList<Data> dataList; //TODO: react to changes in dataList
 	private double centerX;
 	private double centerY;
 	private double radius;
