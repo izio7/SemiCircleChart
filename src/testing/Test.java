@@ -1,7 +1,6 @@
 package testing;
 
 import core.SemiCircleChart;
-import core.SemiCircleChart.Data;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
